@@ -21,20 +21,20 @@ class tree {
         explicit node(tree *owner_tree);
         int get_value() const;
         void set_value(const int &value);
-        virtual ~node() {}
+        virtual ~node() = default;
     };
 
     class number_node : public node {
     public:
         number_node(tree *owner_tree, int value);
-        ~number_node();
+        ~number_node() override;
     };
 
     class variable_node : public node {
         string variable;
     public:
         variable_node(tree *owner_tree, const string &variable);
-        ~variable_node();
+        ~variable_node() override;
         string get_variable() const;
     };
 
@@ -46,7 +46,7 @@ class tree {
     public:
         operator_node(tree *owner_tree, const string &operator_symbol, node_evaluator *evaluator, const int &children_count,const string *input, int &i, const int &input_len);
         operator_node(tree *owner_tree, const string &operator_symbol, node_evaluator *evaluator, const int &children_count, const vector<node*> &children);
-        ~operator_node();
+        ~operator_node() override;
         string get_operator_symbol();
         node *get_child(const int &idx) const;
         node *&get_child_ref(const int &idx);
@@ -59,37 +59,37 @@ class tree {
     class node_evaluator {
     public:
         virtual int evaluate(vector<node*> &children) = 0;
-        virtual ~node_evaluator() {}
+        virtual ~node_evaluator() = default;
     };
 
     class add : public node_evaluator {
-        int evaluate(vector<node*> &children);
-        ~add();
+        int evaluate(vector<node*> &children) override;
+        ~add() override;
     };
 
     class subtract : public node_evaluator {
-        int evaluate(vector<node*> &children);
-        ~subtract();
+        int evaluate(vector<node*> &children) override;
+        ~subtract() override;
     };
 
     class multiply : public node_evaluator {
-        int evaluate(vector<node*> &children);
-        ~multiply();
+        int evaluate(vector<node*> &children) override;
+        ~multiply() override;
     };
 
     class divide : public node_evaluator {
-        int evaluate(vector<node*> &children);
-        ~divide();
+        int evaluate(vector<node*> &children) override;
+        ~divide() override;
     };
 
     class sinus : public node_evaluator {
-        int evaluate(vector<node*> &children);
-        ~sinus();
+        int evaluate(vector<node*> &children) override;
+        ~sinus() override;
     };
 
     class cosinus : public node_evaluator {
-        int evaluate(vector<node*> &children);
-        ~cosinus();
+        int evaluate(vector<node*> &children) override;
+        ~cosinus() override;
     };
 
     node *root;

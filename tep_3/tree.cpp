@@ -23,7 +23,7 @@ tree::tree(const string *input, const int input_len) {
 }
 
 tree::tree() {
-    root = NULL; // NOLINT(*-use-nullptr)
+    root = nullptr;
     add_operator = new add();
     subtract_operator = new subtract();
     multiply_operator = new multiply();
@@ -70,8 +70,7 @@ tree::number_node::number_node(tree *owner_tree, int value) : node(owner_tree){
     this->value = value;
 }
 
-tree::number_node::~number_node() {
-}
+tree::number_node::~number_node() = default;
 
 tree::operator_node::operator_node(tree *owner_tree, const string &operator_symbol, node_evaluator *evaluator, const int &children_count, const string *input, int &i, const int &input_len) : node(owner_tree){
     this->children_count = children_count;
@@ -178,8 +177,7 @@ tree::variable_node::variable_node(tree *owner_tree, const string &variable) : n
     this->variable = variable;
 }
 
-tree::variable_node::~variable_node() {
-}
+tree::variable_node::~variable_node() = default;
 
 string tree::variable_node::get_variable() const {
     return variable;
@@ -309,12 +307,12 @@ int tree::cosinus::evaluate(vector<node*> &children) {
     return 0;
 }
 
-tree::add::~add() {}
-tree::subtract::~subtract() {}
-tree::multiply::~multiply() {}
-tree::divide::~divide() {}
-tree::sinus::~sinus() {}
-tree::cosinus::~cosinus() {}
+tree::add::~add() = default;
+tree::subtract::~subtract() = default;
+tree::multiply::~multiply() = default;
+tree::divide::~divide() = default;
+tree::sinus::~sinus() = default;
+tree::cosinus::~cosinus() = default;
 
 //
 
@@ -343,5 +341,5 @@ tree::node *tree::copy_node(tree *tree_owner, node *other) {
         }
         return new operator_node(tree_owner, node_cast->get_operator_symbol(), node_cast->get_evaluator(), node_cast->get_children_count(), children_copy);
     }
-    return NULL; // NOLINT(*-use-nullptr)
+    return nullptr; // NOLINT(*-use-nullptr)
 }
