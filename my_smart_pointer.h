@@ -43,7 +43,7 @@ public:
     my_smart_pointer& operator=(const my_smart_pointer &other) {
         if (this == other) return *this;
 
-        if (this->ptr != NULL) {
+        if (this->ptr != nullptr) {
             counter->dec();
             if (counter->get() == 0) {
                 delete ptr;
