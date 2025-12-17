@@ -94,6 +94,13 @@ class tree {
 
     node *root;
 
+    node_evaluator *add_operator;
+    node_evaluator *subtract_operator;
+    node_evaluator *multiply_operator;
+    node_evaluator *divide_operator;
+    node_evaluator *sinus_operator;
+    node_evaluator *cosinus_operator;
+
     static int convert_string_to_int(const string &str);
 
     static void print_variables(node *node);
@@ -110,13 +117,6 @@ class tree {
 
     static int compile_node(node *node);
 
-    node_evaluator *add_operator;
-    node_evaluator *subtract_operator;
-    node_evaluator *multiply_operator;
-    node_evaluator *divide_operator;
-    node_evaluator *sinus_operator;
-    node_evaluator *cosinus_operator;
-
 public:
     node* create_node(const string *input, int &i, const int &input_len);
 
@@ -124,7 +124,11 @@ public:
 
     tree(const string *input, int input_len);
 
+    tree(tree &&other) noexcept;
+
     ~tree();
+
+    tree& operator=(tree &&other) noexcept;
 
     void print() const;
 

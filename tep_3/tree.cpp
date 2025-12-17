@@ -22,6 +22,24 @@ tree::tree(const string *input, const int input_len) {
     root = create_node(input, i, input_len);
 }
 
+tree::tree(tree &&other) noexcept {
+    this->add_operator = other.add_operator;
+    other.add_operator = nullptr;
+    this->subtract_operator = other.subtract_operator;
+    other.subtract_operator = nullptr;
+    this->multiply_operator = other.multiply_operator;
+    other.multiply_operator = nullptr;
+    this->divide_operator = other.divide_operator;
+    other.divide_operator = nullptr;
+    this->sinus_operator = other.sinus_operator;
+    other.sinus_operator = nullptr;
+    this->cosinus_operator = other.cosinus_operator;
+    other.cosinus_operator = nullptr;
+
+    this->root = other.root;
+    other.root = nullptr;
+}
+
 tree::tree() {
     root = nullptr;
     add_operator = new add();
@@ -40,6 +58,15 @@ tree::~tree() {
     delete divide_operator;
     delete sinus_operator;
     delete cosinus_operator;
+}
+
+tree& tree::operator=(tree &&other) noexcept {
+    if (this == &other) return *this;
+
+    delete root;
+    this->root = other.root;
+    other.root = nullptr;
+    return *this;
 }
 
 void tree::print() const {
