@@ -237,16 +237,16 @@ tree tree::operator+(const tree &other) const {
     *other_copy = other;
     result.join(other_copy);
     delete other_copy;
-    return result;
+    return std::move(result);
 }
 
-tree &tree::operator=(const tree &other) {
+tree tree::operator=(const tree &other) {
     if (this == &other) {
-        return *this;
+        return std::move(*this);
     }
     delete root;
     this->root = copy_node(this, other.root);
-    return *this;
+    return std::move(*this);
 }
 
 tree::tree(const tree &other) {

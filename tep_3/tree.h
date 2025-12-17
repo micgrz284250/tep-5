@@ -138,7 +138,7 @@ public:
 
     tree operator+(const tree &other) const;
 
-    tree& operator=(const tree &other);
+    tree operator=(const tree &other);
 
     tree(const tree &other);
 };

@@ -12,7 +12,7 @@ using namespace std;
 void console::run() {
     string input;
 
-    tree *tre = NULL; // NOLINT(*-use-nullptr)
+    tree *tre = nullptr;
 
     bool running = true;
 
@@ -22,7 +22,7 @@ void console::run() {
 
         if (input == "exit") {
             running = false;
-            if (tre != NULL) delete tre; // NOLINT(*-use-nullptr)
+            delete tre;
         }
         if (input.substr(0,5) == "enter" && input.length() > 5) {
             string str_arg = input.substr(6);
@@ -33,14 +33,14 @@ void console::run() {
             delete[] arg;
         }
         if (input.substr(0, 5) == "print") {
-            if (tre != NULL) tre->print(); // NOLINT(*-use-nullptr)
+            if (tre != nullptr) tre->print();
         }
         if (input.substr(0, 4) == "vars") {
-            if (tre != NULL) tre->print_variables(); // NOLINT(*-use-nullptr)
+            if (tre != nullptr) tre->print_variables();
             cout << endl;
         }
         if (input.substr(0, 4) == "comp" && input.length() > 4) {
-            if (tre != NULL) { // NOLINT(*-use-nullptr)
+            if (tre != nullptr) {
                 string str_arg = input.substr(5);
                 string *arg = parser::parse(str_arg);
                 const int arg_length = parser::string_table_length(str_arg);
@@ -50,7 +50,7 @@ void console::run() {
             }
         }
         if (input.substr(0, 4) == "join" && input.length() > 4) {
-            if (tre != NULL) { // NOLINT(*-use-nullptr)
+            if (tre != nullptr) {
                 string str_arg = input.substr(5);
                 const string *arg = parser::parse(str_arg);
                 const int arg_length = parser::string_table_length(str_arg);
